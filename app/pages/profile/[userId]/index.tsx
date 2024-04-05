@@ -14,6 +14,8 @@ import PostsWidget from '@/components/posts-widget';
 import FriendListWidget from '@/components/friend-list-widget';
 
 const Profile = ({ user }: { user: IUserRead }) => {
+	const [refetch, setRefetch] = React.useState(false);
+
 	const isDesktop = useMediaQuery('(min-width:1000px)');
 
 	return (
@@ -31,10 +33,14 @@ const Profile = ({ user }: { user: IUserRead }) => {
 						<UserWidget
 							userId={user._id as string}
 							picturePath={user.picturePath as string}
+							refetch={refetch}
 						/>
 					)}
 					<Box m='2rem 0' />
-					<FriendListWidget userId={user?._id as string} />
+					<FriendListWidget
+						userId={user?._id as string}
+						setRefetch={setRefetch}
+					/>
 				</Box>
 				<Box
 					flexBasis={isDesktop ? '42%' : undefined}
@@ -42,7 +48,12 @@ const Profile = ({ user }: { user: IUserRead }) => {
 				>
 					<MyPostWidget picturePath={user?.picturePath as string} />
 					<Box m='2rem 0' />
-					<PostsWidget userId={user?._id as string} isProfile />
+					<PostsWidget
+						userId={user?._id as string}
+						isProfile
+						refetch={refetch}
+						setRefetch={setRefetch}
+					/>
 				</Box>
 			</Box>
 		</Box>
