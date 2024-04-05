@@ -1,7 +1,5 @@
-import { ObjectId } from 'mongoose'
-
 export interface IUserRead {
-  _id: ObjectId
+  _id: string
   firstName: string
   lastName: string
   email: string
