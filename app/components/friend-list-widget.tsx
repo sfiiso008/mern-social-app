@@ -8,7 +8,13 @@ import { Box, Typography, useTheme } from '@mui/material';
 import Friend from './friend';
 import WidgetWrapper from './widget-wrapper';
 
-const FriendListWidget = ({ userId }: { userId: string }) => {
+const FriendListWidget = ({
+	userId,
+	setRefetch,
+}: {
+	userId: string;
+	setRefetch: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
 	const theme = useTheme();
 
 	const { getFriends, friends } = useDataStore(
@@ -48,6 +54,7 @@ const FriendListWidget = ({ userId }: { userId: string }) => {
 							name={`${friend.firstName} ${friend.lastName}`}
 							subTitle={friend.occupation as string}
 							userPicturePath={friend.picturePath as string}
+							setRefetch={setRefetch}
 						/>
 					))}
 				</Box>
